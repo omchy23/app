@@ -35,6 +35,12 @@ const GAMES: Game[] = [
   { id: 6, slug: "pubg", name: "PUBG", image: "/games/pubg.png" },
 ];
 
+const lottery: Game[] = [
+  { id: 1, slug: "wingo", name: "WINGO", image: "/games/wingo.png" },
+  { id: 2, slug: "k3", name: "K3", image: "/games/k3.png" },
+  { id: 3, slug: "moto", name: "Moto Racing", image: "/games/racing.png" },
+]
+
 const INTERVAL_MS = 2000;
 const SWIPE_THRESHOLD = 40;
 
@@ -121,9 +127,8 @@ export default function HeroCarousel() {
               onClick={() => setIndex(i)}
               aria-label={`Go to slide ${i + 1}`}
               aria-current={i === index}
-              className={`h-1 rounded-full transition-all ${
-                i === index ? "w-4 bg-gold-400" : "w-1 bg-white/40"
-              }`}
+              className={`h-1 rounded-full transition-all ${i === index ? "w-4 bg-gold-400" : "w-1 bg-white/40"
+                }`}
             />
           ))}
         </div>
@@ -141,6 +146,43 @@ export default function HeroCarousel() {
 
         <div className="mt-2.5 grid grid-cols-3 gap-2">
           {GAMES.map((game) => (
+            <Link
+              key={game.id}
+              href={`/games/${game.slug}`}
+              onClick={guard}
+              className="overflow-hidden rounded-lg border border-brand-700 bg-brand-800 shadow-sm active:scale-[0.97]"
+            >
+              <div className="relative aspect-[3/4] w-full bg-brand-700">
+                <Image
+                  src={game.image}
+                  alt={game.name}
+                  fill
+                  sizes="(max-width: 480px) 33vw, 125px"
+                  className="select-none object-cover"
+                  draggable={false}
+                />
+              </div>
+              <p className="truncate px-1.5 py-1.5 text-[11px] font-bold text-white">
+                {game.name}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+
+      {/* lottery */}
+
+      <div className="mt-5">
+        <h3 className="flex items-center gap-1.5 text-sm font-bold text-gold-300">
+          <span className="text-base text-gold-400" aria-hidden="true">
+            ★
+          </span>
+          Lottery
+        </h3>
+
+        <div className="mt-2.5 grid grid-cols-3 gap-2">
+          {lottery.map((game) => (
             <Link
               key={game.id}
               href={`/games/${game.slug}`}
