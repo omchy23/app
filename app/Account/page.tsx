@@ -11,10 +11,10 @@ const USER = {
 };
 
 const QUICK_ACTIONS = [
-  { label: "ARWallet", href: "/wallet", icon: "👛", tint: "bg-rose-100" },
-  { label: "Deposit", href: "/deposit", icon: "🟧", tint: "bg-orange-100" },
-  { label: "Withdraw", href: "/withdraw", icon: "💳", tint: "bg-sky-100" },
-  { label: "VIP", href: "/vip", icon: "🛡️", tint: "bg-emerald-100" },
+  { label: "ARWallet", href: "/wallet", icon: "👛", tint: "bg-rose-500/20" },
+  { label: "Deposit", href: "/deposit", icon: "🟧", tint: "bg-orange-500/20" },
+  { label: "Withdraw", href: "/withdraw", icon: "💳", tint: "bg-sky-500/20" },
+  { label: "VIP", href: "/vip", icon: "🛡️", tint: "bg-emerald-500/20" },
 ];
 
 const HISTORY = [
@@ -44,7 +44,7 @@ const SERVICES = [
 function Chevron() {
   return (
     <svg
-      className="h-4 w-4 text-slate-500"
+      className="h-4 w-4 text-mint-300"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -62,10 +62,10 @@ export default function AccountPage() {
   return (
     <div className="pb-4">
       {/* Header */}
-      <header className="rounded-b-[32px] bg-gradient-to-b from-rose-500 to-rose-400 px-4 pb-24 pt-6 text-white">
+      <header className="rounded-b-[32px] bg-linear-to-b from-brand-700 to-brand-900 px-4 pb-24 pt-6 text-white">
         <div className="flex items-center gap-3">
           <div
-            className="h-14 w-14 shrink-0 rounded-full bg-gradient-to-br from-slate-200 to-slate-400 ring-2 ring-white/70"
+            className="h-14 w-14 shrink-0 rounded-full bg-linear-to-br from-brand-700 to-emerald-600 ring-2 ring-gold-400"
             style={
               USER.avatar
                 ? {
@@ -80,14 +80,14 @@ export default function AccountPage() {
           <div className="min-w-0">
             <p className="flex items-center gap-1.5 text-sm font-semibold">
               <span className="truncate">{USER.name}</span>
-              <span className="rounded-full bg-slate-500/80 px-1.5 py-0.5 text-[9px] font-bold">
+              <span className="rounded-full bg-brand-950/60 px-1.5 py-0.5 text-[9px] font-bold text-gold-300">
                 {USER.vip}
               </span>
             </p>
-            <p className="mt-1 inline-flex items-center gap-1 rounded-full bg-amber-400 px-2 py-0.5 text-[10px] font-semibold text-white">
+            <p className="mt-1 inline-flex items-center gap-1 rounded-full bg-linear-to-r from-gold-400 to-gold-500 px-2 py-0.5 text-[10px] font-semibold text-brand-950">
               UID | {USER.uid}
             </p>
-            <p className="mt-1 text-[10px] text-white/90">
+            <p className="mt-1 text-[10px] text-mint-300">
               Last login: {USER.lastLogin}
             </p>
           </div>
@@ -96,28 +96,28 @@ export default function AccountPage() {
 
       {/* Balance card (overlaps the header) */}
       <section className="-mt-[72px] px-3">
-        <div className="rounded-2xl bg-white p-3.5 shadow-sm">
+        <div className="rounded-2xl border border-brand-700 bg-brand-800 p-3.5 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[11px] text-slate-500">Total balance</p>
-              <p className="mt-0.5 text-xl font-extrabold text-slate-900">
+              <p className="text-[11px] text-mint-300">Total balance</p>
+              <p className="mt-0.5 text-xl font-extrabold text-gold-300">
                 {USER.balance}
               </p>
             </div>
             <Link
               href="/wallet"
-              className="rounded-full bg-rose-500 px-4 py-1.5 text-xs font-semibold text-white active:bg-rose-600"
+              className="rounded-full bg-action-500 px-4 py-1.5 text-xs font-semibold text-white active:bg-action-600"
             >
               Enter wallet
             </Link>
           </div>
 
-          <div className="mt-3 grid grid-cols-4 gap-1 border-t border-slate-100 pt-3">
+          <div className="mt-3 grid grid-cols-4 gap-1 border-t border-brand-700 pt-3">
             {QUICK_ACTIONS.map((a) => (
               <Link
                 key={a.label}
                 href={a.href}
-                className="flex flex-col items-center gap-1.5 text-[11px] text-slate-800"
+                className="flex flex-col items-center gap-1.5 text-[11px] text-white"
               >
                 <span
                   className={`flex h-9 w-9 items-center justify-center rounded-xl text-lg ${a.tint}`}
@@ -138,7 +138,7 @@ export default function AccountPage() {
           <Link
             key={h.title}
             href={h.href}
-            className="flex items-center gap-2.5 rounded-xl bg-white p-3 shadow-sm active:scale-[0.98]"
+            className="flex items-center gap-2.5 rounded-xl border border-brand-700 bg-brand-800 p-3 shadow-sm active:scale-[0.98]"
           >
             <span
               className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-base ${h.tint}`}
@@ -147,10 +147,10 @@ export default function AccountPage() {
               {h.icon}
             </span>
             <span className="min-w-0">
-              <span className="block text-xs font-semibold text-slate-900">
+              <span className="block text-xs font-semibold text-white">
                 {h.title}
               </span>
-              <span className="block text-[10px] leading-tight text-slate-500">
+              <span className="block text-[10px] leading-tight text-mint-300">
                 {h.sub}
               </span>
             </span>
@@ -159,22 +159,22 @@ export default function AccountPage() {
       </section>
 
       {/* Menu list */}
-      <section className="mx-3 mt-3 rounded-2xl bg-white px-3 shadow-sm">
+      <section className="mx-3 mt-3 rounded-2xl border border-brand-700 bg-brand-800 px-3 shadow-sm">
         <ul>
           {MENU.map((m) => (
-            <li key={m.label} className="border-b border-slate-100 last:border-b-0">
+            <li key={m.label} className="border-b border-brand-700 last:border-b-0">
               <Link href={m.href} className="flex items-center gap-3 py-3">
                 <span
-                  className="flex h-7 w-7 items-center justify-center rounded-lg bg-rose-100 text-sm"
+                  className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-700 text-sm"
                   aria-hidden="true"
                 >
                   {m.icon}
                 </span>
-                <span className="flex-1 text-[13px] text-slate-900">
+                <span className="flex-1 text-[13px] text-white">
                   {m.label}
                 </span>
                 {m.value && (
-                  <span className="text-xs text-slate-800">{m.value}</span>
+                  <span className="text-xs text-gold-300">{m.value}</span>
                 )}
                 <Chevron />
               </Link>
@@ -184,17 +184,17 @@ export default function AccountPage() {
       </section>
 
       {/* Service center */}
-      <section className="mx-3 mt-3 rounded-2xl bg-white p-3.5 shadow-sm">
-        <h2 className="text-[13px] text-slate-900">Service center</h2>
+      <section className="mx-3 mt-3 rounded-2xl border border-brand-700 bg-brand-800 p-3.5 shadow-sm">
+        <h2 className="text-[13px] font-semibold text-gold-300">Service center</h2>
         <div className="mt-3 grid grid-cols-3 gap-y-3">
           {SERVICES.map((s) => (
             <Link
               key={s.label}
               href={s.href}
-              className="flex flex-col items-center gap-1 text-center text-[10px] text-slate-500"
+              className="flex flex-col items-center gap-1 text-center text-[10px] text-mint-300"
             >
               <span
-                className="flex h-8 w-8 items-center justify-center rounded-lg bg-rose-100 text-base"
+                className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-700 text-base"
                 aria-hidden="true"
               >
                 {s.icon}
@@ -209,7 +209,7 @@ export default function AccountPage() {
       <div className="px-3 pt-5">
         <button
           type="button"
-          className="flex w-full items-center justify-center gap-2 rounded-full border border-rose-500 bg-white py-2.5 text-sm text-rose-500 active:bg-rose-50"
+          className="flex w-full items-center justify-center gap-2 rounded-full border border-gold-400 bg-brand-800 py-2.5 text-sm text-gold-300 active:bg-brand-700"
         >
           <svg
             className="h-4 w-4"

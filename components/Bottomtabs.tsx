@@ -3,11 +3,13 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLoginGuard } from "./LoginPopup";
 
 type Tab = {
   label: string;
   href: string;
   icon: ReactNode;
+  gated?: boolean;
 };
 
 const svgProps = {
@@ -33,6 +35,7 @@ const HOME: Tab = {
 const ACCOUNT: Tab = {
   label: "Account",
   href: "/Account",
+  gated: true,
   icon: (
     <svg {...svgProps}>
       <circle cx="12" cy="8" r="4" />
@@ -43,6 +46,7 @@ const ACCOUNT: Tab = {
 
 export default function BottomTabs() {
   const pathname = usePathname();
+  const { guard, popup } = useLoginGuard();
 
   const renderTab = (tab: Tab) => {
     const active = pathname === tab.href;
@@ -51,8 +55,9 @@ export default function BottomTabs() {
         key={tab.href}
         href={tab.href}
         aria-current={active ? "page" : undefined}
+        onClick={tab.gated ? guard : undefined}
         className={`flex flex-1 flex-col items-center gap-0.5 pt-2 text-[10px] font-medium ${
-          active ? "text-rose-500" : "text-slate-400"
+          active ? "text-gold-400" : "text-mint-300"
         }`}
       >
         {tab.icon}
@@ -62,27 +67,32 @@ export default function BottomTabs() {
   };
 
   return (
+    <>
     <nav
       aria-label="Main"
-      className="fixed bottom-0 left-1/2 z-50 flex h-14 w-full max-w-[390px] -translate-x-1/2 items-start border-t border-slate-100 bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.06)]"
+      className="fixed bottom-0 left-1/2 z-50 flex h-[calc(3.5rem+env(safe-area-inset-bottom))] w-full -translate-x-1/2 items-start rounded-t-2xl border-t border-brand-700 bg-brand-900 pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_14px_rgba(0,0,0,0.35)] min-[480px]:max-w-97.5"
     >
       {renderTab(HOME)}
 
       {/* Centre reward button */}
       <Link
         href="/rewards"
+        onClick={guard}
         className="flex flex-1 flex-col items-center"
         aria-label="Get ₹500"
       >
-        <span className="-mt-5 flex h-12 w-12 items-center justify-center rounded-full border-4 border-white bg-gradient-to-b from-orange-400 to-rose-500 text-xs font-black text-white shadow-md">
+        <span className="-mt-5 flex h-12 w-12 items-center justify-center rounded-full border-4 border-brand-900 bg-linear-to-b from-amber-300 to-orange-500 text-xs font-black text-white shadow-md">
           GO
         </span>
-        <span className="mt-0.5 text-[10px] font-bold text-rose-500">
+        <span className="mt-0.5 text-[10px] font-bold text-gold-300">
           Get ₹500
         </span>
       </Link>
 
       {renderTab(ACCOUNT)}
     </nav>
+    {/* outside the nav: a transformed parent would break position:fixed */}
+    {popup}
+    </>
   );
 }

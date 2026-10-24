@@ -1,26 +1,17 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-brand-950: #04211b; /* page background */
+  --color-brand-900: #06302a; /* bars (bottom tabs) */
+  --color-brand-800: #0a4136; /* cards, notice box */
+  --color-brand-700: #0f5446; /* borders */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-gold-300: #f4d58a;  /* headings, logo text */
+  --color-gold-400: #f6c445;  /* active tab, dots */
+  --color-gold-500: #e5a824;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  --color-mint-300: #8fb8ab;  /* muted text, inactive icons */
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  --color-action-500: #12a150; /* green Login button */
+  --color-action-600: #0e8a43;
 }
